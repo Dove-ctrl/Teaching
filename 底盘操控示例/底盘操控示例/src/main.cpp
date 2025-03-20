@@ -14,7 +14,7 @@ void autonomous(void) {
 
 void usercontrol(void) {
   //循环不断刷新电机的电压值
-  //摇杆3前后推，机器前后走，摇杆1左右推，机器左右走
+  //摇杆3前后推，机器前后走，摇杆1左右推，机器左右转
   while(true){
     LF.spin(fwd , (Controller.Axis3.position() + Controller.Axis1.position()) * 120 , voltageUnits::mV);
     LM.spin(fwd , (Controller.Axis3.position() + Controller.Axis1.position()) * 120 , voltageUnits::mV);
@@ -22,11 +22,11 @@ void usercontrol(void) {
     RF.spin(fwd , (Controller.Axis3.position() - Controller.Axis1.position()) * 120 , voltageUnits::mV);
     RM.spin(fwd , (Controller.Axis3.position() - Controller.Axis1.position()) * 120 , voltageUnits::mV);
     RB.spin(fwd , (Controller.Axis3.position() - Controller.Axis1.position()) * 120 , voltageUnits::mV);
-    wait(10,msec);//这是为了调整刷新的速率，防止主控死机
+    wait(10,msec);//调整刷新的速率
   }
 }
 
-//main函数不允许做任何更改
+//main函数不做任何更改
 int main() {
   Competition.autonomous(autonomous);
   Competition.drivercontrol(usercontrol);
